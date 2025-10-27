@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quotes by Chikku — Fuel for Your Ambition</title>
+  <meta name="description" content="Daily words to sharpen your focus, strengthen your mindset, and keep you moving — Quotes by Chikku." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #f6f7ff;         /* very light pastel blue */
+      --bg-2: #fff8f5;         /* warm pastel cream for subtle gradient */
+      --card: rgba(255,255,255,0.78);
+      --accent: #6fb1c9;      /* soft teal */
+      --accent-2: #f1a8b3;    /* soft rose */
+      --text: #213342;        /* deep slate for readable text */
+      --muted: #556b78;
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color:var(--text);
+      background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+
+    .wrap{width:100%;max-width:980px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Comfortaa, Inter, sans-serif;font-size:20px}
+    h1{margin:0;font-family:Comfortaa, Inter, sans-serif;font-weight:700;font-size:28px;letter-spacing:0.2px}
+    .tag{color:var(--muted);font-size:14px}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+
+    .card{background:var(--card);backdrop-filter: blur(6px);border-radius:var(--radius);padding:28px;box-shadow:0 10px 30px rgba(34,50,60,0.08);}
+
+    .quote-display{min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px}
+    .quote-text{font-size:20px;line-height:1.4;font-weight:600}
+    .quote-author{font-size:14px;color:var(--muted);font-weight:600}
+
+    .controls{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:12px;border:0;cursor:pointer;font-weight:600}
+    .btn-prim{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white}
+    .btn-ghost{background:transparent;border:1px solid rgba(33,51,66,0.08);color:var(--text)}
+
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Right column */
+    .side .card{padding:18px}
+    .list{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+    .list button{background:transparent;border-radius:10px;border:1px dashed rgba(33,51,66,0.06);padding:10px;text-align:left}
+
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Add quote form */
+    form{display:flex;flex-direction:column;gap:8px}
+    input,textarea{border-radius:10px;border:1px solid rgba(33,51,66,0.06);padding:10px;background:transparent;color:var(--text);font-family:inherit}
+
+    /* animations */
+    .fade-in{animation:fadeIn .45s ease both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+    @media (max-width:880px){
+      .hero{grid-template-columns:1fr;}
+      .logo{width:48px;height:48px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">C</div>
+        <div>
+          <h1>Quotes by Chikku — Fuel for Your Ambition</h1>
+          <div class="tag">Daily words to sharpen your focus, strengthen your mindset, and keep you moving.</div>
+        </div>
+      </div>
+      <nav class="small">
+        <span>Focused • Practical • Shareable</span>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="card fade-in" id="mainCard" aria-live="polite">
+        <div class="quote-display">
+          <div id="quoteText" class="quote-text">Loading a powerful idea for you…</div>
+          <div id="quoteAuthor" class="quote-author">—</div>
+        </div>
+
+        <div class="controls">
+          <button class="btn btn-prim" id="newQuote">✨ Show another</button>
+          <button class="btn btn-ghost" id="shareBtn">Share</button>
+          <button class="btn btn-ghost" id="saveBtn">♡ Save</button>
+          <div style="margin-left:auto" class="small">Quote #{<span id="quoteIndex">0</span>}</div>
+        </div>
+
+        <div style="margin-top:14px;color:var(--muted);font-size:13px">Tip: Save favorites locally. Use Share to copy a quick message for social or chat.</div>
+      </div>
+
+      <aside class="side">
+        <div class="card fade-in">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div style="font-weight:700">Your favourites</div>
+            <button id="clearFav" class="btn btn-ghost" title="Clear saved">Clear</button>
+          </div>
+
+          <div id="favList" class="list small" style="margin-top:12px">No favorites yet — save the quotes you love.</div>
+
+          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(33,51,66,0.04)" />
+
+          <div style="font-weight:700">Add a quote</div>
+          <form id="addForm" onsubmit="return false;">
+            <input id="newText" placeholder="Quote text" required />
+            <input id="newAuthor" placeholder="Author (optional)" />
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="addBtn" class="btn btn-prim" type="submit">Add</button>
+              <button id="randomFromList" class="btn btn-ghost" title="Show random from your list">Random from list</button>
+            </div>
+          </form>
+
+        </div>
+      </aside>
+    </section>
+
+    <div class="footer">© <span id="year"></span> • Quotes by Chikku — Fuel for Your Ambition.</div>
+  </main>
+
+  <script>
+    // Curated motivational & success-focused quotes (108 total)
+    const quotes = [
+      {text: "Start where you are. Use what you have. Do what you can.", author: "— Arthur Ashe"},
+      {text: "Small steps every day — that's how mountains move.", author: "— Chikku"},
+      {text: "Be kinder to yourself; you're doing the best you can.", author: "— Unknown"},
+      {text: "The quietest moments often carry the loudest lessons.", author: "— Chikku"},
+      {text: "Progress is a series of tiny victories. Celebrate them.", author: "— Unknown"},
+      {text: "Don’t wait for inspiration. Carry a notebook and create it.", author: "— Anon"},
+      {text: "Courage is showing up even when you're unsure of the outcome.", author: "— Chikku"},
+      {text: "When things feel heavy, remember you have handled hard before.", author: "— Unknown"},
+      // 100 new mixed motivational quotes:
+      {text: "Decide. Commit. Execute. Repeat.", author: "— Unknown"},
+      {text: "Ambition is quiet work and loud results.", author: "— Chikku"},
+      {text: "Clarity of purpose beats bursts of effort.", author: "— Unknown"},
+      {text: "Build systems, not just goals.", author: "— Chikku"},
+      {text: "Consistency compounds better than intensity.", author: "— Unknown"},
+      {text: "Plan like a strategist, act like a craftsman.", author: "— Chikku"},
+      {text: "Discipline is the bridge between intent and outcome.", author: "— Unknown"},
+      {text: "Focus on progress, not perfection.", author: "— Chikku"},
+      {text: "Show up for the work, even on ordinary days.", author: "— Unknown"},
+      {text: "Turn your excuses into data and iterate.", author: "— Chikku"},
+      {text: "The best investment is consistent effort.", author: "— Unknown"},
+      {text: "Lead with curiosity; follow with action.", author: "— Chikku"},
+      {text: "Every finished task teaches you something valuable.", author: "— Unknown"},
+      {text: "Respect the grind — results will respect you back.", author: "— Chikku"},
+      {text: "Your network grows from genuine help, not hollow talk.", author: "— Unknown"},
+      {text: "Fail forward: extract the lesson quickly.", author: "— Chikku"},
+      {text: "Make fewer promises, deliver more value.", author: "— Unknown"},
+      {text: "Sustainable momentum wins the long game.", author: "— Chikku"},
+      {text: "Choose courage over comfort one choice at a time.", author: "— Unknown"},
+      {text: "Write the next small chapter — then the next.", author: "— Chikku"},
+      {text: "Time is neutral; your use of it is not.", author: "— Unknown"},
+      {text: "Master the basics and then innovate.", author: "— Chikku"},
+      {text: "A focused hour beats scattered days.", author: "— Unknown"},
+      {text: "Let feedback sharpen your approach, not blunt your will.", author: "— Chikku"},
+      {text: "Keep your promises to yourself.", author: "— Unknown"},
+      {text: "Confidence is quiet preparation showing up.", author: "— Chikku"},
+      {text: "Good leaders make the path clearer, not easier.", author: "— Unknown"},
+      {text: "Measure habits, not moods.", author: "— Chikku"},
+      {text: "Small wins daily create unshakable momentum.", author: "— Unknown"},
+      {text: "If it matters, schedule it like an appointment.", author: "— Chikku"},
+      {text: "Your future self will thank you for today’s discipline.", author: "— Unknown"},
+      {text: "Quiet confidence outperforms loud opinions.", author: "— Chikku"},
+      {text: "Be the person who makes things happen.", author: "— Unknown"},
+      {text: "Imperfect action beats perfect planning.", author: "— Chikku"},
+      {text: "Learn the rules, then write better ones.", author: "— Unknown"},
+      {text: "Success is made of repeated small courageous acts.", author: "— Chikku"},
+      {text: "Climb steadily; admire the view once you get there.", author: "— Unknown"},
+      {text: "Your calendar is a statement of priorities.", author: "— Chikku"},
+      {text: "Start small. Get visible. Build momentum.", author: "— Unknown"},
+      {text: "Ask better questions; get better results.", author: "— Chikku"},
+      {text: "Take responsibility — then design the solution.", author: "— Unknown"},
+      {text: "Grow skills faster than you grow excuses.", author: "— Chikku"},
+      {text: "Decisive people create options; indecision kills them.", author: "— Unknown"},
+      {text: "A clear why simplifies every how.", author: "— Chikku"},
+      {text: "Work deep, rest deliberate.", author: "— Unknown"},
+      {text: "Momentum is built by finishing things.", author: "— Chikku"},
+      {text: "Be curious about the outcome, not attached to it.", author: "— Unknown"},
+      {text: "Invest in your craft, not in shortcuts.", author: "— Chikku"},
+      {text: "Great results come from tiny ruthless focus.", author: "— Unknown"},
+      {text: "Simplify to amplify your influence.", author: "— Chikku"},
+      {text: "Your daily routine is your silent leader.", author: "— Unknown"},
+      {text: "Accept feedback quickly — it shortens learning cycles.", author: "— Chikku"},
+      {text: "Be the starter of solutions, not the asker of problems.", author: "— Unknown"},
+      {text: "Subtract distractions; add deliberate practice.", author: "— Chikku"},
+      {text: "Be patient with the process and impatient with excuses.", author: "— Unknown"},
+      {text: "If it’s important, protect the time for it.", author: "— Chikku"},
+      {text: "Fail early, learn fast, iterate forever.", author: "— Unknown"},
+      {text: "The right mindset makes hard work a craft.", author: "— Chikku"},
+      {text: "Progress is permission to continue.", author: "— Unknown"},
+      {text: "Turn clarity into ruthless action.", author: "— Chikku"},
+      {text: "Your energy is your work currency.", author: "— Unknown"},
+      {text: "Be a lifelong student of your chosen field.", author: "— Chikku"},
+      {text: "The confident are curious, not defensive.", author: "— Unknown"},
+      {text: "Make decisions when information is good enough.", author: "— Chikku"},
+      {text: "Momentum follows consistent priorities.", author: "— Unknown"},
+      {text: "Own the outcome before you own the credit.", author: "— Chikku"},
+      {text: "Let discipline create your daily freedom.", author: "— Unknown"},
+      {text: "Plan to ship; ship to learn.", author: "— Chikku"},
+      {text: "Bold steps require small daily bets.", author: "— Unknown"},
+      {text: "Simplicity turns effort into impact.", author: "— Chikku"},
+      {text: "A strong morning is a powerful day.", author: "— Unknown"},
+      {text: "Seek progress that’s measurable and humane.", author: "— Chikku"},
+      {text: "Your reputation is built by consistent delivery.", author: "— Unknown"},
+      {text: "Learn faster than the world forgets.", author: "— Chikku"},
+      {text: "Goals without systems are hopeful wishes.", author: "— Unknown"},
+      {text: "Confidence grows from completed work.", author: "— Chikku"},
+      {text: "Be decisive, then adjust with humility.", author: "— Unknown"},
+      {text: "The best leaders make people better, not smaller.", author: "— Chikku"},
+      {text: "Create with intention and ship with pride.", author: "— Unknown"},
+      {text: "A single focused hour can change your week.", author: "— Chikku"},
+      {text: "Block time for the important, not just the urgent.", author: "— Unknown"},
+      {text: "Iterate the idea, not your identity.", author: "— Chikku"},
+      {text: "Resilience is practice, not a personality trait.", author: "— Unknown"},
+      {text: "Choose bold clarity over polite ambiguity.", author: "— Chikku"},
+      {text: "You build influence by creating useful work.", author: "— Unknown"},
+      {text: "Focus like a laser, but rest like a human.", author: "— Chikku"},
+      {text: "Make decisions that future-you will appreciate.", author: "— Unknown"},
+      {text: "Take small bets that protect your downside.", author: "— Chikku"},
+      {text: "Great careers are mosaics of repeated actions.", author: "— Unknown"},
+      {text: "Be present in the process; results will follow.", author: "— Chikku"},
+      {text: "Start before you feel ready; readiness follows action.", author: "— Unknown"},
+      {text: "A worthy goal stretches you, not breaks you.", author: "— Chikku"},
+      {text: "Practice the habit of finishing things.", author: "— Unknown"},
+      {text: "Turn knowledge into small experiments.", author: "— Chikku"},
+      {text: "Be the kind of person who solves tomorrow’s problems today.", author: "— Unknown"},
+      {text: "Make momentum your default state.", author: "— Chikku"},
+      {text: "Intensity without direction is wasted energy.", author: "— Unknown"},
+      {text: "Protect long-term attention like a rare resource.", author: "— Chikku"},
+      {text: "Aim for mastery, not just visibility.", author: "— Unknown"},
+      {text: "Small, deliberate improvements outpace periodic bursts.", author: "— Chikku"},
+      {text: "Say yes to focus and no to busywork.", author: "— Unknown"},
+      {text: "Design your days with intent, not by accident.", author: "— Chikku"},
+      {text: "The future rewards those who refine their craft now.", author: "— Unknown"}
+    ];
+
+    let pool = [...quotes];
+    let currentIndex = 0;
+
+    // Elements
+    const quoteText = document.getElementById('quoteText');
+    const quoteAuthor = document.getElementById('quoteAuthor');
+    const newQuoteBtn = document.getElementById('newQuote');
+    const shareBtn = document.getElementById('shareBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const quoteIndex = document.getElementById('quoteIndex');
+    const favList = document.getElementById('favList');
+    const clearFav = document.getElementById('clearFav');
+    const addForm = document.getElementById('addForm');
+    const addBtn = document.getElementById('addBtn');
+    const newText = document.getElementById('newText');
+    const newAuthor = document.getElementById('newAuthor');
+    const randomFromListBtn = document.getElementById('randomFromList');
+
+    // Local storage keys
+    const FAV_KEY = 'chikku_quotes_fav';
+    const CUSTOM_KEY = 'chikku_quotes_custom';
+
+    // Init
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function pickRandom(arr){
+      return arr[Math.floor(Math.random()*arr.length)];
+    }
+
+    function showQuote(q, idx){
+      quoteText.textContent = q.text;
+      quoteAuthor.textContent = q.author || '— Unknown';
+      quoteIndex.textContent = idx + 1;
+      flashCard();
+    }
+
+    function flashCard(){
+      const card = document.getElementById('mainCard');
+      card.animate([{opacity:0, transform:'translateY(8px)'},{opacity:1, transform:'none'}],{duration:380,easing:'cubic-bezier(.2,.9,.3,1)'});
+    }
+
+    function loadCustom(){
+      try{
+        const raw = localStorage.getItem(CUSTOM_KEY);
+        if(raw){
+          const list = JSON.parse(raw);
+          pool = [...quotes, ...list];
+        } else pool = [...quotes];
+      }catch(e){pool = [...quotes];}
+    }
+
+    function loadFavs(){
+      try{
+        const raw = localStorage.getItem(FAV_KEY);
+        if(raw){
+          return JSON.parse(raw);
+        }
+      }catch(e){}
+      return [];
+    }
+
+    function renderFavs(){
+      const favs = loadFavs();
+      if(!favs.length){
+        favList.innerHTML = 'No favorites yet — save the quotes you love.';
+        return;
+      }
+      favList.innerHTML = '';
+      favs.forEach((f, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = f.text.slice(0,80) + (f.text.length>80 ? '…' : '') + '
+' + (f.author||'');
+        btn.onclick = () => showQuote(f, i);
+        favList.appendChild(btn);
+      });
+    }
+
+    function saveCurrent(){
+      const favs = loadFavs();
+      const current = {text: quoteText.textContent, author: quoteAuthor.textContent};
+      // avoid duplicates
+      if(favs.some(f=>f.text===current.text)) return alert('Already in favorites');
+      favs.unshift(current);
+      localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+      renderFavs();
+      alert('Saved to favorites');
+    }
+
+    function shareCurrent(){
+      const txt = `${quoteText.textContent} ${quoteAuthor.textContent} — via Quotes by Chikku`;
+      if(navigator.share){
+        navigator.share({text:txt}).catch(()=>copyToClipboard(txt));
+      } else copyToClipboard(txt);
+    }
+
+    function copyToClipboard(text){
+      navigator.clipboard.writeText(text).then(()=>{
+        alert('Copied quote to clipboard');
+      }).catch(()=>{
+        prompt('Copy the quote below', text);
+      });
+    }
+
+    // events
+    newQuoteBtn.addEventListener('click', ()=>{
+      loadCustom();
+      const q = pickRandom(pool);
+      currentIndex = pool.indexOf(q);
+      showQuote(q, currentIndex);
+    });
+
+    saveBtn.addEventListener('click', saveCurrent);
+    shareBtn.addEventListener('click', shareCurrent);
+
+    clearFav.addEventListener('click', ()=>{
+      if(confirm('Clear all favorites?')){
+        localStorage.removeItem(FAV_KEY);
+        renderFavs();
+      }
+    });
+
+    addForm.addEventListener('submit', ()=>{
+      const t = newText.value.trim();
+      if(!t) return alert('Please write a quote first');
+      const a = newAuthor.value.trim() || '— Chikku';
+      const custom = JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]');
+      custom.unshift({text:t,author:a});
+      localStorage.setItem(CUSTOM_KEY, JSON.stringify(custom));
+      newText.value=''; newAuthor.value='';
+      loadCustom();
+      alert('Added to your personal list — click Show another to see it');
+    });
+
+    randomFromListBtn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      const custom = JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]');
+      if(!custom.length) return alert('You have no custom quotes yet. Add one below!');
+      const q = pickRandom(custom);
+      showQuote(q, quotes.length + Math.floor(Math.random()*custom.length));
+    });
+
+    // initial display
+    (function init(){
+      loadCustom();
+      renderFavs();
+      const q = pickRandom(pool);
+      currentIndex = pool.indexOf(q);
+      showQuote(q, currentIndex);
+    })();
+  </script>
+</body>
+</html>
